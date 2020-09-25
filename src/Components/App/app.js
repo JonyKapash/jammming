@@ -23,9 +23,9 @@ class App extends React.Component {
 					id: 2,
 				},
 				{
-					name: "Skinny Love",
-					artist: "Bon Iver",
-					album: "For Emma, Forever Ago",
+					name: "Titanic",
+					artist: "Celin Dion",
+					album: "Hymn to the Sea",
 					id: 3,
 				},
 			],
@@ -54,15 +54,25 @@ class App extends React.Component {
 			],
 		};
 		this.addTrack = this.addTrack.bind(this);
+		this.removeTrack = this.removeTrack.bind(this);
 	}
 
 	addTrack(track) {
-		for (let i = 0; i < this.state.playlistTracks.length; i++) {
-			if (this.state.playlistTracks.id === track.id) {
+		let tracks = this.state.playlistTracks;
+		for (let i = 0; i < tracks.length; i++) {
+			if (tracks[i].id === track.id) {
 				return;
 			}
 		}
-		this.setState({ playlistTracks: [this.state.playlistTracks, track] });
+		this.setState({ tracks: tracks.push(track) });
+	}
+
+	removeTrack(track) {
+		this.setState({
+			playlistTracks: this.state.playlistTracks.filter((trk) => {
+				return trk.id !== track.id;
+			}),
+		});
 	}
 
 	render() {
@@ -81,6 +91,7 @@ class App extends React.Component {
 						<Playlist
 							playlistName={this.state.playlistName}
 							playlistTracks={this.state.playlistTracks}
+							onRemove={this.removeTrack}
 						/>
 					</div>
 				</div>
