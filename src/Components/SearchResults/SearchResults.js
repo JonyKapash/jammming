@@ -12,6 +12,9 @@ class SearchResults extends React.Component {
 					onAdd={this.props.onAdd}
 					isRemoval={false}
 				/>
+				<button className="clearSearchResults" onClick={this.props.onClear}>
+					CLEAR
+				</button>
 			</div>
 		);
 	}

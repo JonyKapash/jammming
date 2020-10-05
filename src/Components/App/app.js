@@ -21,6 +21,7 @@ class App extends React.Component {
 		this.updatePlaylistName = this.updatePlaylistName.bind(this);
 		this.savePlaylist = this.savePlaylist.bind(this);
 		this.search = this.search.bind(this);
+		this.clear = this.clear.bind(this);
 	}
 
 	addTrack(track) {
@@ -61,6 +62,10 @@ class App extends React.Component {
 		});
 	}
 
+	clear() {
+		this.setState({ searchResults: [] });
+	}
+
 	render() {
 		return (
 			<div>
@@ -73,6 +78,7 @@ class App extends React.Component {
 						<SearchResults
 							searchResults={this.state.searchResults}
 							onAdd={this.addTrack}
+							onClear={this.clear}
 						/>
 						<Playlist
 							playlistName={this.state.playlistName}
